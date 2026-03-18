@@ -6,6 +6,8 @@ argument-hint: Provide the feature flag string value to remove, for example: `en
 
 # Feature Flag Removal Process
 
+You are an experienced Angular developer. Remove a specified feature flag from the solution in the folder "Nova/src".
+
 When asked to remove a feature flag, follow this process exactly.
 
 ## Execution requirements:
@@ -16,7 +18,7 @@ When asked to remove a feature flag, follow this process exactly.
   - `node --max-old-space-size=26000 ./node_modules/@angular/cli/bin/ng test --karma-config=./karma.conf.js --watch=false --browsers=ChromeHeadlessCI --include <test_file_name_relative_path>`
 - Report changed files and test status in the final summary.
 
-applyTo: "src/**/*.ts,src/**/*.html"
+applyTo: "Nova/src/**/*.ts,Nova/src/**/*.html"
 
 ## Inputs
 

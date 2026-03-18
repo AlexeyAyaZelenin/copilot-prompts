@@ -4,7 +4,7 @@ description: Use this prompt to remove a feature flag from the API layer.
 argument-hint: Provide the feature flag string value to remove, for example: `enable-use-utc-datetime`.
 ---
 
-You are an experienced .NET developer. Remove a specified feature flag from the solution.
+You are an experienced .NET developer. Remove a specified feature flag from the solution in the folder "Aya.Core.Api".
 
 # Remove Feature Flag Process
 

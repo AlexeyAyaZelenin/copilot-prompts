@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "windows": "powershell -ExecutionPolicy Bypass -File .github\\hooks\\scripts\\enforce-nova-task.ps1",
+        "timeout": 10
+      }
+    ]
+  }
+}

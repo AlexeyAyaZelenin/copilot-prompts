@@ -1,27 +1,52 @@
 ---
-name: remove-feature-flag
+name: remove-feature-flag-all
 description: Describe when to use this prompt
-argument-hint: Provide the feature flag string value to remove, for example: `enable-use-utc-datetime`.
 ---
 
-# Feature Flag Removal Process
+# Step 1
 
-When asked to remove a feature flag, follow this process exactly.
+You are an experienced .NET developer. Remove a specified feature flag from the solution in the folder "Aya.Core.Api".
 
-## Inputs
-- Accept the feature flag string value, for example: `enable-use-utc-datetime`.
-- Treat the feature flag as always enabled and clean up dead code accordingly.
+## Remove Feature Flag Process
 
-## First Remove the flag from UI Layer
+Follow this process exactly.
+
+### Steps:
+1) Ask for the exact feature flag name (constant or string key) if not provided.
+2) Locate where the flag is defined (typically a public const in `FeatureFlags` or similar enums/constants).
+3) Find all C# usages (controllers, services, repositories, helpers, tests).
+4) Remove feature flag usage, assuming the flag is always `true`:
+   - If the flag is the only condition, inline the `true` branch and remove the `else` branch.
+   - If combined with other conditions, remove just the flag portion and simplify.
+   - Remove any attributes tied to the flag (e.g., `FeatureFlagMaintenance`, `LDFeatureFlag`).
+5) Update or remove affected unit tests accordingly.
+6) Run the relevant unit tests and report results.
+
+### Constraints:
+- Ignore non-C# files (e.g., `.ts`).
+- Keep changes minimal and aligned with existing code style.
+
+# Step 2
+
+## Feature Flag Removal Process
+
+You are an experienced Angular developer. Remove a specified feature flag from the solution in the folder "Nova/src".
+
+Follow this process exactly.
 
 ### Execution requirements:
 
+- Treat the feature flag as always enabled and clean up dead code accordingly.
 - Search and update TypeScript and HTML usages.
 - Run targeted tests for changed specs with:
   - `node --max-old-space-size=26000 ./node_modules/@angular/cli/bin/ng test --karma-config=./karma.conf.js --watch=false --browsers=ChromeHeadlessCI --include <test_file_name_relative_path>`
 - Report changed files and test status in the final summary.
 
-applyTo: "src/**/*.ts,src/**/*.html"
+applyTo: "Nova/src/**/*.ts,Nova/src/**/*.html"
+
+### Inputs
+
+- Accept the feature flag string value, for example: `enable-use-utc-datetime`.
 
 ### Locate Definition
 
@@ -82,23 +107,3 @@ Notes:
 - Run one command per changed test file (replace `<test_file_name_relative_path>` each time).
 - Ensure all changed tests pass before completing the task.
 - If no related tests exist, state that explicitly in the final summary.
-
-## Then Remove the flag from API Layer
-
-You are an experienced .NET developer. Remove a specified feature flag from the solution.
-
-### Steps:
-
-1) Ask for the exact feature flag name (constant or string key) if not provided.
-2) Locate where the flag is defined (typically a public const in `FeatureFlags` or similar enums/constants).
-3) Find all C# usages (controllers, services, repositories, helpers, tests).
-4) Remove feature flag usage, assuming the flag is always `true`:
-   - If the flag is the only condition, inline the `true` branch and remove the `else` branch.
-   - If combined with other conditions, remove just the flag portion and simplify.
-   - Remove any attributes tied to the flag (e.g., `FeatureFlagMaintenance`, `LDFeatureFlag`).
-5) Update or remove affected unit tests accordingly.
-6) Run the relevant unit tests and report results.
-
-### Constraints:
-- Ignore non-C# files (e.g., `.ts`).
-- Keep changes minimal and aligned with existing code style.
